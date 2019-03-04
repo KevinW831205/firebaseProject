@@ -25,7 +25,7 @@ var uiConfig = {
             // Return type determines whether we continue the redirect automatically
             // or whether we leave that to developer to handle.
             main.signin = true
-            $(".buttonCol").children().attr("disabled", false)
+            $(".buttonCol").show();
             $("#submitForm").show();
             $("#signinText").hide();
             return false;
@@ -177,14 +177,13 @@ var main = {
         //create buttons and assingn classes
         var deleteButton = $("<button>");
         var editButton = $("<button>").text("edit");
+        editButton.addClass("btn btn-warning editButton")
+        deleteButton.addClass("btn btn-danger deleteButton")
+
         if (main.signin) {      //whether user is sign in have enabled or disabled buttons
-            editButton.addClass("btn btn-warning editButton")
-            deleteButton.addClass("btn btn-danger deleteButton")
+            buttonCol.show()
         } else {
-            editButton.addClass("btn btn-warning editButton")
-            deleteButton.addClass("btn btn-danger deleteButton")
-            editButton.attr("disabled", true)
-            deleteButton.attr("disabled", true)
+            buttonCol.hide()
         }
         deleteButton.text("X");
         buttonCol.append(editButton)
