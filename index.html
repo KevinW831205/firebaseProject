@@ -6,17 +6,122 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>firebase Trainschedule</title>
+    <title>firebase Trainscheduler</title>
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 </head>
 
 <body>
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid" id="trainHeader">
+            <div class="container">
+                <h1 class="display-4">Train Scheduler</h1>
+                <p class="lead" id="currentTimeDisplay">Current Time: <span id="clockTime"></span></p>
+            </div>
+        </div>
 
-    <button id="testBtn">test</button>
+
+        <div class="card" id="trainSchedule">
+            <div class="card-header cardTitle">
+                Current Train Schedule
+            </div>
+            <div>
+                <table class="table " id="scheduleTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Train Name</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Frequency(train/min)</th>
+                            <th scope="col">Next Arrival</th>
+                            <th scope="col">Minutes Away</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="trainInfo">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
 
+
+        <!-- <div class="card submitForm" id="submitForm">
+                <div class="card-header cardTitle">
+                    Add Train
+                </div>
+                <form class="mx-3 my-2">
+                    <div class="form-group">
+                        <label for="trainNameInput">Train Name</label>
+                        <input type="text" class="form-control" id="trainNameInput" placeholder="Some Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="destinatonInput">Destination</label>
+                        <input type="text" class="form-control" id="destinationInput" placeholder="Some Where">
+                    </div>
+                    <div class="form-group">
+                        <label for="initialTimeInput">First Train Time (HH:mm - military time)</label>
+                        <input type="text" name="time" class="form-control" id="initialTimeInput" placeholder="24:00">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Frequency (Train/min)</label>
+                        <input type="number" class="form-control" id="frequencyInput" placeholder="90">
+                    </div>
+
+                    <button type="button" class="btn btn-primary" id="submitButton">Submit</button>
+                </form>
+            </div> -->
+
+
+
+
+    </div>
+
+    <div class="container fixed-bottom" >
+
+        <div class="card submitForm">
+            <div class="card-header cardTitle" id="formTitle">
+                Add Train
+            </div>
+            <form class="mx-3 my-2">
+                <div class="form-group">
+                    <label for="trainNameInput">Train Name</label>
+                    <input type="text" class="form-control" id="trainNameInput" placeholder="Some Name">
+                </div>
+                <div class="form-group">
+                    <label for="destinatonInput">Destination</label>
+                    <input type="text" class="form-control" id="destinationInput" placeholder="Some Where">
+                </div>
+                <div class="form-group">
+                    <label for="initialTimeInput">First Train Time (HH:mm - military time)</label>
+                    <input type="text" name="time" class="form-control" id="initialTimeInput" placeholder="04:00">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Frequency (Train/min)</label>
+                    <input type="number" class="form-control" id="frequencyInput" placeholder="0">
+                </div>
+
+                <button type="button" class="btn btn-primary" id="submitButton">Submit</button>
+            </form>
+        </div>
+        
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
     <script type="text/javascript" src="assets/javascript/logic.js"></script>

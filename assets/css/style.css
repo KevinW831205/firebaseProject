@@ -1,0 +1,24 @@
+#trainHeader{
+    text-align: center;
+}
+
+#currentTimeDisplay{
+    font-size: 36px;
+}
+
+#scheduleTable{
+    
+}
+
+.cardTitle{
+    font-weight: bold;
+}
+
+.editing{
+    background-color:yellow;   
+}
+
+#trainSchedule{
+    margin-bottom: 500px;    
+    
+}
