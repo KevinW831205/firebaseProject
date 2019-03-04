@@ -107,13 +107,14 @@ var main = {
         $("#formTitle").addClass("editing")
         var infokey = infoRow.attr("data-key")
         //modify form information
-        $("#submitButton").off()
         $("#submitButton").text("Complete Edit");
+        $("#formTtile").text("Edit Information")
         $("#trainNameInput").val(infoRow.children("#trainName").text())
         $("#destinationInput").val(infoRow.children("#destination").text())
         $("#initialTimeInput").val(infoRow.attr("data-initialTime"))
         $("#frequencyInput").val(infoRow.children("#frequency").text())
         //apply new event listner to update on submission instead of add new train
+        $("#submitButton").off()
         $("#submitButton").on("click", function () {
             event.preventDefault();
             var trainName = $("#trainNameInput").val().trim();
@@ -144,9 +145,10 @@ var main = {
                 infoRow.children("#nextTrain").text(main.arrivalTime);
                 infoRow.children("#minutesAway").text(main.minutesRemain);
             });
-            
+
             //return to non-editing state
             main.editing = false;
+            $("#formTtile").text("Add Train")
             $("#submitButton").text("Submit");
             infoRow.removeClass("editing")
             $("#formTitle").removeClass("editing")
