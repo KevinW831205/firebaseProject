@@ -10,10 +10,19 @@
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
 </head>
 
 <body>
+
+    <!-- The surrounding HTML is left untouched by FirebaseUI.
+     Your app may use that space for branding, controls and other customizations.-->
+    <h1>Welcome to My Awesome App</h1>
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
+    
     <div class="container">
         <div class="jumbotron jumbotron-fluid" id="trainHeader">
             <div class="container">
@@ -81,7 +90,7 @@
 
     </div>
 
-    <div class="container fixed-bottom" >
+    <div class="container fixed-bottom">
 
         <div class="card submitForm">
             <div class="card-header cardTitle" id="formTitle">
@@ -108,14 +117,8 @@
                 <button type="button" class="btn btn-primary" id="submitButton">Submit</button>
             </form>
         </div>
-        
+
     </div>
-
-
-
-
-
-
 
 
 
