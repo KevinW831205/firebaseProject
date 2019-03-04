@@ -30,7 +30,7 @@ var uiConfig = {
             // Return type determines whether we continue the redirect automatically
             // or whether we leave that to developer to handle.
             main.signin=true
-            $("#buttonCol").children().attr("disabled",false)
+            $(".buttonCol").children().attr("disabled",false)
             $("#submitForm").show();
             $("#signinText").hide();
             return false;
@@ -173,7 +173,7 @@ var main = {
         var frequencyCol = $("<td>").attr("id", "frequency");
         var nextTrainCol = $("<td>").attr("id", "nextTrain");
         var minutesAwayCol = $("<td>").attr("id", "minutesAway");
-        var buttonCol = $("<td>").attr("id","buttonCol")
+        var buttonCol = $("<td>").addClass("buttonCol")
         //create buttons and assingn classes
         var deleteButton = $("<button>");
         var editButton = $("<button>").text("edit");
