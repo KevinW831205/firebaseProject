@@ -22,3 +22,7 @@
     margin-bottom: 500px;    
     
 }
+
+#submitForm{
+    display:none;
+}

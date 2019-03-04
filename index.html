@@ -19,13 +19,11 @@
 
     <!-- The surrounding HTML is left untouched by FirebaseUI.
      Your app may use that space for branding, controls and other customizations.-->
-    <div id="firebaseui-auth-container"></div>
-    <div id="loader">Loading...</div>
 
     <div class="container">
         <div class="jumbotron jumbotron-fluid" id="trainHeader">
             <div class="container">
-                <h1 class="display-4">Train Scheduler</h1>
+                <h1 class="display-4">Train Scheduler v1</h1>
                 <p class="lead" id="currentTimeDisplay">Current Time: <span id="clockTime"></span></p>
             </div>
         </div>
@@ -91,11 +89,18 @@
 
     <div class="container fixed-bottom">
 
-        <div class="card submitForm">
+        <div class="card">
             <div class="card-header cardTitle" id="formTitle">
                 Add Train
             </div>
-            <form class="mx-3 my-2">
+
+            <div id="firebaseui-auth-container">
+                <h2 style="text-align: center">Sign in to add and modify Trains</h2>
+            </div>
+            <div id="loader">Loading...</div>
+    
+    
+            <form class="mx-3 my-2" id="submitForm">
                 <div class="form-group">
                     <label for="trainNameInput">Train Name</label>
                     <input type="text" class="form-control" id="trainNameInput" placeholder="Some Name">

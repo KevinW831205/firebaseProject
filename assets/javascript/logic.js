@@ -29,6 +29,7 @@ var uiConfig = {
         // User successfully signed in.
         // Return type determines whether we continue the redirect automatically
         // or whether we leave that to developer to handle.
+        $("#submitForm").show();
         return false;
       },
       uiShown: function() {
