@@ -24,5 +24,11 @@
 }
 
 #submitForm{
-    display:none;
+    /* display:none; */
+}
+
+.disabledBtn{
+    color: gray;
+    background-color: lightgray;
+    border-style: none;
 }

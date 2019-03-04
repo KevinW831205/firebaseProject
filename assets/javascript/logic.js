@@ -25,36 +25,39 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 var uiConfig = {
     callbacks: {
-      signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-        // User successfully signed in.
-        // Return type determines whether we continue the redirect automatically
-        // or whether we leave that to developer to handle.
-        $("#submitForm").show();
-        return false;
-      },
-      uiShown: function() {
-        // The widget is rendered.
-        // Hide the loader.
-        document.getElementById('loader').style.display = 'none';
-      }
+        signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+            // User successfully signed in.
+            // Return type determines whether we continue the redirect automatically
+            // or whether we leave that to developer to handle.
+            main.signin=true
+            $("#buttonCol").children().attr("disabled",false)
+            $("#submitForm").show();
+            return false;
+        },
+        uiShown: function () {
+            // The widget is rendered.
+            // Hide the loader.
+            
+            document.getElementById('loader').style.display = 'none';
+        }
     },
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
     signInFlow: 'popup',
     signInSuccessUrl: '',
     signInOptions: [
-      // Leave the lines as is for the providers you want to offer your users.
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    //   firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-    //   firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-    //   firebase.auth.GithubAuthProvider.PROVIDER_ID,
-    //   firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    //   firebase.auth.PhoneAuthProvider.PROVIDER_ID
+        // Leave the lines as is for the providers you want to offer your users.
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        //   firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        //   firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+        firebase.auth.GithubAuthProvider.PROVIDER_ID,
+        //   firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        //   firebase.auth.PhoneAuthProvider.PROVIDER_ID
     ],
     // Terms of service url.
     tosUrl: '<your-tos-ur>',
     // Privacy policy url.
     privacyPolicyUrl: '<your-privacy-policy-url>'
-  };
+};
 
 
 
@@ -67,6 +70,7 @@ var main = {
     arrivalTime: 0,
     minutesRemain: 0,
     editing: false,
+    signin: false,
 
     nextArrivalGet: function (initialTime, frequency) {
         //take currentTime in formatn HH:mm, outputs next train time and minutes away
@@ -168,15 +172,22 @@ var main = {
         var frequencyCol = $("<td>").attr("id", "frequency");
         var nextTrainCol = $("<td>").attr("id", "nextTrain");
         var minutesAwayCol = $("<td>").attr("id", "minutesAway");
-        var ButtonCol = $("<td>")
+        var buttonCol = $("<td>").attr("id","buttonCol")
         //create buttons and assingn classes
         var deleteButton = $("<button>");
         var editButton = $("<button>").text("edit");
+        if(main.signin){
         editButton.addClass("btn btn-warning editButton")
         deleteButton.addClass("btn btn-danger deleteButton")
+        }else{
+            editButton.addClass("btn btn-warning editButton")
+            deleteButton.addClass("btn btn-danger deleteButton")    
+            editButton.attr("disabled",true)
+            deleteButton.attr("disabled",true)
+        }
         deleteButton.text("X");
-        ButtonCol.append(editButton)
-        ButtonCol.append(deleteButton)
+        buttonCol.append(editButton)
+        buttonCol.append(deleteButton)
         //move database info to table
         trainNameCol.text(trainInfo.val().trainName);
         destinationCol.text(trainInfo.val().destination);
@@ -194,7 +205,7 @@ var main = {
         newRow.addClass("trainInfoRow")
 
 
-        newRow.append(trainNameCol, destinationCol, frequencyCol, nextTrainCol, minutesAwayCol, ButtonCol);
+        newRow.append(trainNameCol, destinationCol, frequencyCol, nextTrainCol, minutesAwayCol, buttonCol);
         $("#trainInfo").append(newRow)
     },
 
@@ -219,17 +230,13 @@ var main = {
 }
 
 // The start method will wait until the DOM is loaded.
-ui.start('#firebaseui-auth-container', uiConfig);
-
-
-
+// ui.start('#firebaseui-auth-container', uiConfig);
 
 $(document).ready(function () {
-
     setInterval(main.timeUpdate, 1000);
 
     database.ref("/trainInfo").on("child_added", function (snapshot) {
-        main.trainInfoUpdate(snapshot);
+        main.trainInfoUpdate(snapshot);     
     });
 
     $("#submitButton").on("click", function (event) {
@@ -251,6 +258,6 @@ $(document).ready(function () {
             main.editInfo($(this));
         }
     });
-
 });
+
 
