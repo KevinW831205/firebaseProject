@@ -32,6 +32,7 @@ var uiConfig = {
             main.signin=true
             $("#buttonCol").children().attr("disabled",false)
             $("#submitForm").show();
+            $("#signinText").hide();
             return false;
         },
         uiShown: function () {
