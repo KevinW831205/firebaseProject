@@ -13,83 +13,52 @@ var config = {
     messagingSenderId: "1042932856480"
 };
 firebase.initializeApp(config);
-
 var database = firebase.database();
+
+
+
 
 var provider = new firebase.auth.GoogleAuthProvider();
 
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
-
-
 var uiConfig = {
     callbacks: {
-        signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-            // User successfully signed in.
-            // Return type determines whether we continue the redirect automatically
-            // or whether we leave that to developer to handle.
-            return true;
-        },
-        uiShown: function () {
-            // The widget is rendered.
-            // Hide the loader.
-            document.getElementById('loader').style.display = 'none';
-        }
+      signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+        // User successfully signed in.
+        // Return type determines whether we continue the redirect automatically
+        // or whether we leave that to developer to handle.
+        return true;
+      },
+      uiShown: function() {
+        // The widget is rendered.
+        // Hide the loader.
+        document.getElementById('loader').style.display = 'none';
+      }
     },
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
     signInFlow: 'popup',
     signInSuccessUrl: '<url-to-redirect-to-on-success>',
     signInOptions: [
-        // Leave the lines as is for the providers you want to offer your users.
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-        firebase.auth.GithubAuthProvider.PROVIDER_ID,
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        firebase.auth.PhoneAuthProvider.PROVIDER_ID
+      // Leave the lines as is for the providers you want to offer your users.
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    //   firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    //   firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+    //   firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    //   firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    //   firebase.auth.PhoneAuthProvider.PROVIDER_ID
     ],
     // Terms of service url.
     tosUrl: '<your-tos-url>',
     // Privacy policy url.
     privacyPolicyUrl: '<your-privacy-policy-url>'
-};
+  };
 
-// Temp variable to hold the anonymous user data if needed.
-var data = null;
-// Hold a reference to the anonymous current user.
-var anonymousUser = firebase.auth().currentUser;
-ui.start('#firebaseui-auth-container', {
-  // Whether to upgrade anonymous users should be explicitly provided.
-  // The user must already be signed in anonymously before FirebaseUI is
-  // rendered.
-  autoUpgradeAnonymousUsers: true,
-  signInSuccessUrl: '<url-to-redirect-to-on-success>',
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    firebase.auth.PhoneAuthProvider.PROVIDER_ID
-  ],
-  callbacks: {
-    // signInFailure callback must be provided to handle merge conflicts which
-    // occur when an existing credential is linked to an anonymous user.
-    signInFailure: function(error) {
-      // For merge conflicts, the error.code will be
-      // 'firebaseui/anonymous-upgrade-merge-conflict'.
-      if (error.code != 'firebaseui/anonymous-upgrade-merge-conflict') {
-        return Promise.resolve();
-      }
-      // The credential the user tried to sign in with.
-      var cred = error.credential;
-      // Copy data from anonymous user to permanent user and delete anonymous
-      // user.
-      // ...
-      // Finish sign-in after data is copied.
-      return firebase.auth().signInWithCredential(cred);
-    }
-  }
-});
+
+
+
+
 
 
 
@@ -248,68 +217,13 @@ var main = {
     },
 }
 
+// The start method will wait until the DOM is loaded.
+ui.start('#firebaseui-auth-container', uiConfig);
+
+
+
 
 $(document).ready(function () {
-    // The start method will wait until the DOM is loaded.
-    ui.start('#firebaseui-auth-container', uiConfig);
-
-    // ui.start('#firebaseui-auth-container', {
-    //     signInOptions: [
-    //         firebase.auth.EmailAuthProvider.PROVIDER_ID
-    //     ],
-    //     // Other config options...
-    // });
-
-
-    // ui.start('#firebaseui-auth-container', {
-    //     signInOptions: [
-    //         {
-    //             provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    //             signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD
-    //         }
-    //     ],
-    //     // Other config options...
-
-    // });
-
-    // // Is there an email link sign-in?
-    // if (ui.isPendingRedirect()) {
-    //     ui.start('#firebaseui-auth-container', uiConfig);
-    // }
-    // // This can also be done via:
-    // if ((firebase.auth().isSignInWithEmailLink(window.location.href)) {
-    //     ui.start('#firebaseui-auth-container', uiConfig);
-    // }
-
-    // ui.start('#firebaseui-auth-container', {
-    //     signInOptions: [
-    //         // List of OAuth providers supported.
-    //         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    //         // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-    //         // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-    //         // firebase.auth.GithubAuthProvider.PROVIDER_ID
-    //     ],
-    //     // Other config options...
-    // });
-
-
-    // firebase.auth().signInWithPopup(provider).then(function (result) {
-    //     // This gives you a Google Access Token. You can use it to access the Google API.
-    //     var token = result.credential.accessToken;
-    //     // The signed-in user info.
-    //     var user = result.user;
-    //     // ...
-    // }).catch(function (error) {
-    //     // Handle Errors here.
-    //     var errorCode = error.code;
-    //     var errorMessage = error.message;
-    //     // The email of the user's account used.
-    //     var email = error.email;
-    //     // The firebase.auth.AuthCredential type that was used.
-    //     var credential = error.credential;
-    //     // ...
-    // });
-
 
     setInterval(main.timeUpdate, 1000);
 
