@@ -89,7 +89,7 @@ var main = {
         console.log(1);
         $(".trainInfoRow").each(function () {
             main.nextArrivalGet($(this).attr("data-initialTime"), $(this).children("#frequency").text());
-            $("#clockTime").text(moment().format("HH:mm"));
+            $("#clockTime").text(moment().format("HH:mm:ss"));
             $(this).children("#nextTrain").text(main.arrivalTime);
             $(this).children("#minutesAway").text(main.minutesRemain);
         })
