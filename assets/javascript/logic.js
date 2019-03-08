@@ -132,7 +132,7 @@ var main = {
         $("#frequencyInput").val(infoRow.children("#frequency").text())
         //apply new event listner to update on submission instead of add new train
         $("#submitButton").off()
-        $("#submitButton").on("click", function () {
+        $("#submitButton").on("click", function (event) {
             event.preventDefault();
             var trainName = $("#trainNameInput").val().trim();
             var destination = $("#destinationInput").val().trim();
